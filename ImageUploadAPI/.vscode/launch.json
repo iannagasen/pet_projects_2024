@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-ImageUploadApplication<image-upload>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "dev.agasen.imageupload.ImageUploadApplication",
+      "projectName": "image-upload",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
