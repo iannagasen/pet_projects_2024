@@ -1,0 +1,35 @@
+version: "3.0"
+
+services:
+  elasticsearch:
+    image: elasticsearch:8.9.0
+    container_name: elasticsearch
+    restart: no
+    volumes:
+      - elastic-data:/usr/share/elasticsearch/data
+    # command: >
+    #   bash -c "
+    #     elasticsearch -p /tmp/epid & /bin/bash /utils/wait-for-it.sh -t 0 localhost:9200 -- curl -XPUT 'http://127.0.0.1:9200/springboot-app-index' -d @index.json; 
+    #     kill $(cat /tmp/epid) && wait $(cat /tmp/epid); 
+    #     exit 0;
+    #   "
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      # single node cluster
+      discovery.type: single-node
+      xpack.security.enabled: false
+      bootstrap.memory_lock: true
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - elk
+
+
+volumes:
+  elastic-data:
+    driver: local
+
+networks:
+  elk:
+    driver: bridge
