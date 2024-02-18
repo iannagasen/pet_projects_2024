@@ -48,16 +48,16 @@ INSERT INTO client
 VALUES (1, 'client', 'secret');
 
 INSERT INTO redirect_urls
-VALUES (1, 'http://my-redirect_url', 1);
+VALUES (1, 'http://my-redirect_url.com', 1);
 
 INSERT INTO client_scopes
-VALUES (1, 'open_id', 1);
+VALUES (1, 'openid', 1);
 
 INSERT INTO grant_types
-VALUES (1, 'AUTHORIZATION_CODE', 1);
+VALUES (1, 'authorization_code', 1);
 
 INSERT INTO grant_types
-VALUES (2, 'CLIENT_CREDENTIALS', 1);
+VALUES (2, 'client_credentials', 1);
 
 INSERT INTO authentication_methods
 VALUES (1, 'client_secret_basic', 1);

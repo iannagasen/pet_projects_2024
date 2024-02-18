@@ -12,4 +12,4 @@ PKCE
 ![](docs/screenshots/README/image.png)
 
 
-http://localhost:8080/oauth2/authorize?response_type=code&client_id=client&scope=open_id&redirect_uri=http://my-redirect_url.com
+http://localhost:8080/oauth2/authorize?response_type=code&client_id=client&scope=openid&redirect_uri=http://my-redirect_url.com
