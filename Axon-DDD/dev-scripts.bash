@@ -12,4 +12,4 @@ spring init \
 --version=0.0.1-SNAPSHOT \
 product-service
 
-docker run --name axonserver -p
+docker run --name axonserver -p         
