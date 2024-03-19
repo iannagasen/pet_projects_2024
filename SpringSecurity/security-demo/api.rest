@@ -1,0 +1,5 @@
+###
+
+GET http://localhost:8080/test
+Authorization: Basic neil:12345
+Request-Id: test
