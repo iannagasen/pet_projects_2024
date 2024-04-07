@@ -12,7 +12,6 @@ import dev.agasen.ecomm.framework.adapters.output.mysql.data.ReviewData;
 import dev.agasen.ecomm.framework.adapters.output.mysql.data.ReviewListData;
 import dev.agasen.ecomm.framework.adapters.output.mysql.repository.ProductRepository;
 import dev.agasen.ecomm.framework.adapters.output.mysql.repository.ReviewListRepository;
-import dev.agasen.ecomm.framework.adapters.output.mysql.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -20,7 +19,6 @@ import lombok.RequiredArgsConstructor;
 public class TestDataRunner implements CommandLineRunner {
 
   private final ProductRepository productRepository;
-  private final ReviewRepository reviewRepository;
   private final ReviewListRepository reviewListRepository;
 
   @Override

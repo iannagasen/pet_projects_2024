@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import dev.agasen.ecomm.application.ports.output.ReviewOutputPort;
 import dev.agasen.ecomm.domain.entity.Reviews;
-import dev.agasen.ecomm.framework.adapters.output.mysql.mappers.ToReviewEntity;
+import dev.agasen.ecomm.framework.adapters.output.mysql.mappers.ReviewMapper;
 import dev.agasen.ecomm.framework.adapters.output.mysql.repository.ReviewListRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -14,8 +14,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ReviewRepositoryAdapter implements ReviewOutputPort {
 
-  // private final ReviewRepository reviewRepository;
   private final ReviewListRepository reviewListRepository;
+  private final ReviewMapper reviewMapper;
 
   @Override
   public Reviews getReviews(Long productId) {
@@ -23,7 +23,7 @@ public class ReviewRepositoryAdapter implements ReviewOutputPort {
         .findByProductId(productId)
         .map(r -> new Reviews(
           r.getProductId(), 
-          r.getReviews().stream().map(new ToReviewEntity()).toList()
+          r.getReviews().stream().map(reviewMapper::toDomainModel).toList()
         ))
         .orElseThrow();
   }
@@ -33,7 +33,7 @@ public class ReviewRepositoryAdapter implements ReviewOutputPort {
     return reviewListRepository.findAll().stream()
         .map(r -> new Reviews(
           r.getProductId(), 
-          r.getReviews().stream().map(new ToReviewEntity()).toList()
+          r.getReviews().stream().map(reviewMapper::toDomainModel).toList()
         ))
         .toList(); 
   }
