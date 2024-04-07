@@ -11,6 +11,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RatingData {
-  private double rate;
+public class RatingSummaryData {
+  
+  private long rate;
+  private long noOfRates;
+  private long itemsSold;
+
 }
