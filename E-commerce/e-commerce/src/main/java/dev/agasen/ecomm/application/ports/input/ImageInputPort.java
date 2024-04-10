@@ -7,5 +7,5 @@ public interface ImageInputPort {
   Image getImage(Long id);
 
   Long saveImage(Image image);
-
+  
 }

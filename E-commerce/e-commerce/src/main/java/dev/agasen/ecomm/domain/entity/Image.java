@@ -1,6 +1,6 @@
 package dev.agasen.ecomm.domain.entity;
 
-public record Image (
+public record Image(
   long id,
   String name,
   String type,

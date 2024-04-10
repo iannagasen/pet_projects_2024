@@ -3,7 +3,6 @@ package dev.agasen.ecomm.framework.adapters.input.rest;
 import java.io.IOException;
 
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,9 +28,6 @@ public class ImageRestAdapter {
     MediaType.IMAGE_PNG_VALUE
   })
   public byte[] getImage(@PathVariable Long id) {
-    // add headers - maybe use ResponseENtity
-    // to save the image name and others
-
     byte[] data = imageUseCase.getImage(id).imageData();
     return data;
   }
@@ -48,9 +44,5 @@ public class ImageRestAdapter {
     }
     return imageUseCase.saveImage(image);
   }
-  
-
-
-
   
 }

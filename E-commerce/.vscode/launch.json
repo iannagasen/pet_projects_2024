@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-ECommerceMonolithApplication<e-commerce>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "dev.agasen.ecomm.ECommerceMonolithApplication",
+      "projectName": "e-commerce",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

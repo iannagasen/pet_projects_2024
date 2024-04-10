@@ -23,7 +23,10 @@ public class TestDataRunner implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    
+    // run();
+  }
+
+  private void run(){
     var product1 = new ProductData("Product1", "description of Product1", List.of(new ImagePathData("somePath")));
     var product2 = new ProductData("Product2", "description of Product2", List.of(new ImagePathData("somePath")));
     var product3 = new ProductData("Product3", "description of Product3", List.of(new ImagePathData("somePath")));
