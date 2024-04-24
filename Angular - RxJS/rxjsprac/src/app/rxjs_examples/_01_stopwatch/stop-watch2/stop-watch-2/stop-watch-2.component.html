@@ -1,0 +1,4 @@
+<button #startBtn>Start/Restart</button>
+<button (click)="stopTimer()">Stop</button>
+
+<div>Timer: {{ timer$ | async | number:'1.1-1' }}</div>
