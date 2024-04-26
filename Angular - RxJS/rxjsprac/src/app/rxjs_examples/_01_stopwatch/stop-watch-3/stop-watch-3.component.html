@@ -1,0 +1,10 @@
+
+<button #startBtn>
+  Start
+</button>
+
+<button (click)="stopTimer()">
+  Stop
+</button>
+
+<div>Timer: {{ timer$ | async }} </div>
