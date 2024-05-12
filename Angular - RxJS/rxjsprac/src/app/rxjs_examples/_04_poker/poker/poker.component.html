@@ -1,0 +1,6 @@
+<p>poker works!</p>
+<button #clickStart>Distribute Cards</button>
+
+<li *ngFor="let card of cards$ | async">
+  {{ card.suit }} {{ card.face }}
+</li>

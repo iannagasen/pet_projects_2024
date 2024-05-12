@@ -1,0 +1,60 @@
+<div class="body">
+  <div id="timerDisplay" class="countdownHolder">
+    <p style="font-size:40px;">
+    Press Start <br/>
+    <small>
+      Have fun! :) <br/>
+      <small>
+        read the comments
+      </small>
+    </small>
+    </p>
+  </div>
+
+  <button type="button" id="btn-start" #startBtn>
+    Start
+  </button>
+
+  <button type="button" id="btn-pause" #pauseBtn>
+    Pause
+  </button>
+
+  <br/>
+
+  <button type="button" id="btn-set-to" #setToBtn>
+    Set To
+  </button>
+
+  <input id="input-set-to" style="width:40px" type="number" min=0 value="0"/>
+  <!-- I'm sorry for this, but I was lazy.. :) -->
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+  <button type="button" id="btn-reset" #resetBtn>
+    Reset
+  </button>
+
+  <br/>
+
+  <button type="button" id="btn-up" #upBtn>
+    Count Up
+  </button>
+
+  <button type="submit" type="button" id="btn-down" #downBtn>
+    Count Down
+  </button>
+
+  <br/>
+
+  <label>
+    Tick Speed
+  </label>
+  <input id="${ElementIds.InputTickSpeed}" style="width:60px" type="number" min=0 value="${this.initialTickSpeed}"/>
+
+  <!-- I'm sorry for this, but I was lazy.. :) -->
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+  <label>
+    Count Diff   
+  </label>
+  <input id="${ElementIds.InputCountDiff}" style="width:60px" type="number" min=0 value="${this.initialCountDiff}"/>
+</div>

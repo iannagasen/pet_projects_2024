@@ -1,5 +1,8 @@
 <button #startBtn>Start</button>
 <button (click)="stopTimer()">Stop</button>
 <button (click)="resumeTimer()">Resume</button>
+<button (click)="captureTime()">Capture</button>
 
 <div>Timer: {{ (timer$ | async | number: '1.2') || 0}}</div>
+
+<div>CapturedTime: {{ time | async | json}}</div>

@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { fromEvent, interval, Observable, timer, map, takeUntil, Subject } from 'rxjs';
+import { fromEvent, interval, Observable, timer, map, takeUntil, Subject, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-stop-watch4',
@@ -12,6 +12,8 @@ export class StopWatch4Component implements AfterViewInit{
   
   stop$ = new Subject<boolean>;
   timer$!: Observable<number>;
+  time = new BehaviorSubject<number | null>(null);
+
   currentTime = 0;
   
   @ViewChild('startBtn') startBtn!: ElementRef;
@@ -36,5 +38,8 @@ export class StopWatch4Component implements AfterViewInit{
   }
 
   resumeTimer() {
+  }
+
+  captureTime() {
   }
 }

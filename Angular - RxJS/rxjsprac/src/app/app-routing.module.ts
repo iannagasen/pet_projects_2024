@@ -4,6 +4,9 @@ import { StopWatchComponent } from './rxjs_examples/_01_stopwatch/stop-watch/sto
 import { StopWatch2Component } from './rxjs_examples/_01_stopwatch/stop-watch2/stop-watch-2/stop-watch-2.component';
 import { StopWatch3Component } from './rxjs_examples/_01_stopwatch/stop-watch-3/stop-watch-3.component';
 import { StopWatch4Component } from './rxjs_examples/_01_stopwatch/stop-watch4/stop-watch4.component';
+import { PigLatinComponent } from './rxjs_examples/_02_piglatinify/pig-latin/pig-latin.component';
+import { StopwatchImproveComponent } from './rxjs_examples/_03_stopwatch_improve/stopwatch-improve/stopwatch-improve.component';
+import { PokerComponent } from './rxjs_examples/_04_poker/poker/poker.component';
 
 const routes: Routes = [
     { path: 'examples/stopwatch',
@@ -17,6 +20,15 @@ const routes: Routes = [
       
     { path: 'examples/stopwatch/4',
     component: StopWatch4Component },
+    
+    { path: 'examples/piglatin',
+    component: PigLatinComponent },
+    
+    { path: 'examples/stopwatch-improve',
+    component: StopwatchImproveComponent },
+    
+    { path: 'examples/poker',
+    component: PokerComponent },
 ];
 
 @NgModule({
