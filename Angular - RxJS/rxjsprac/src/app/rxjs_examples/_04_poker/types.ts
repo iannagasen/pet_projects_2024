@@ -4,7 +4,7 @@ export type Suit = 'Hearts' | 'Diamonds' | 'Spades' | 'Clubs'
 export type Card = {
   face: Face
   suit: Suit
-}
+} | 'UNSET'
 
 export type Player = {
   name: string
@@ -12,7 +12,7 @@ export type Player = {
 
 export type PlayerCards = {
   player: Player,
-  cards: [Card, Card, Card, Card, Card, Card, Card, Card, Card, Card, Card, Card, Card]
+  cards: Tuple<Card, 13>
 }
 
 export type PlayerSubmittedCards = {
@@ -24,9 +24,10 @@ export type PlayerSubmittedCards = {
   }
 }
 
-export type CardsDistributedEvent = { 
+export type CardDistributedEvent = { 
   type: 'DISTRIBUTED', 
-  distributedCardsPerPlayer: [PlayerCards, PlayerCards, PlayerCards, PlayerCards]
+  player: Player,
+  card: Card
 }
 
 export type CardsSubmittedEvent = {
@@ -37,20 +38,37 @@ export type CardsSubmittedEvent = {
 export type GameState = {
   type: 'undistributed' | 'distributing' | 'distributed' | 'playing' | 'submitted',
   roundNo: number,
-  currentPlayerCards?: [PlayerCards, PlayerCards, PlayerCards, PlayerCards]
+  currentPlayerCards: Tuple<PlayerCards, 4>
   matchHistory: [PlayerSubmittedCards, PlayerSubmittedCards, PlayerSubmittedCards, PlayerSubmittedCards][]
 };
 
+
 export function submitEventReducer(
-  event: CardsDistributedEvent | CardsSubmittedEvent,
+  event: CardDistributedEvent | CardsSubmittedEvent,
   currentState: GameState
 ): GameState {
   switch (event.type) {
     case "DISTRIBUTED":
+      const {player, card} = event;
+      const { currentPlayerCards } = currentState;
+      const index = currentPlayerCards.findIndex(pc => pc.player.name === player.name)
+      const targetPlayerCards = currentPlayerCards[index].cards
+      const firstUnsetIndex = targetPlayerCards.findIndex(card => card === 'UNSET');
+
+      const newTargetPlayerCards = {
+        player: player,
+        cards: targetPlayerCards.slice(0, firstUnsetIndex).concat(card).concat(
+          targetPlayerCards.slice(firstUnsetIndex+1)) as Tuple<Card, 13>
+      }
+
+      const newPlayerCards = 
+          currentPlayerCards.slice(0, index).concat(newTargetPlayerCards).concat(
+            currentPlayerCards.slice(index+1))
+
       return {
         type: 'distributed',
         roundNo: currentState.roundNo++, // is this the right place to increment this?
-        currentPlayerCards: event.distributedCardsPerPlayer,
+        currentPlayerCards: newPlayerCards as Tuple<PlayerCards, 4>,
         matchHistory: currentState.matchHistory
       }
     case "SUBMITTED":
@@ -61,6 +79,8 @@ export function submitEventReducer(
       }
   }
 }
+
+export const UNSET_CARDS: Tuple<Card, 13> = ['UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET']
 
 export const CARD_VALUE_ARR: Tuple<Card, 52> = [
   { suit: "Hearts", face: '1'},

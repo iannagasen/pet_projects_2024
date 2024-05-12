@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Card, Deck, GameState } from '../types';
+import { Card, Deck, GameState, Player, submitEventReducer, UNSET_CARDS } from '../types';
 import { concatMap, from, fromEvent, interval, map, Observable, of, scan, take, tap } from 'rxjs';
 
 @Component({
@@ -11,7 +11,6 @@ import { concatMap, from, fromEvent, interval, map, Observable, of, scan, take, 
 })
 export class PokerComponent implements AfterViewInit {
   gameState: GameState;
-  cards$!: Observable<Card[]>;
 
   @ViewChild('clickStart') clickStartBtn!: ElementRef;
 
@@ -20,19 +19,46 @@ export class PokerComponent implements AfterViewInit {
       type: 'undistributed',
       matchHistory: [],
       roundNo: 0,
+      currentPlayerCards: [
+        { player: {name: 'Player001'}, cards: UNSET_CARDS },
+        { player: {name: 'Player002'}, cards: UNSET_CARDS },
+        { player: {name: 'Player003'}, cards: UNSET_CARDS },
+        { player: {name: 'Player004'}, cards: UNSET_CARDS },
+      ]
     }
+
+    console.log(this.gameState)
   }
   
   ngAfterViewInit(): void {
-    this.cards$ = fromEvent(this.clickStartBtn.nativeElement, 'click').pipe(
+    const getPlayer = (i: number): Player => ({
+      name: (i%4===0) ? 'Player001' :
+            (i%4===1) ? 'Player002' :  
+            (i%4===2) ? 'Player003'
+                      : 'Player004'
+    });
+
+    fromEvent(this.clickStartBtn.nativeElement, 'click').pipe(
       concatMap(() => {
         const shuffleDeck = new Deck().shuffle();
         return interval(50).pipe(
           take(shuffleDeck.length),
-          map(i => (shuffleDeck[i])),
-          scan((acc: Card[], curr) => [...acc, curr], [])
+          // tap(i => {
+          //   console.log("index -- " + i);
+          //   console.log(getPlayer(i))
+          // }),
+          map(i => ({ 
+            player: getPlayer(i),
+            card: (shuffleDeck[i]) 
+          })),
         )
       }),
-    )
+    ).subscribe(val => {
+      this.gameState = submitEventReducer({
+        type: 'DISTRIBUTED', 
+        card: val.card, 
+        player: val.player
+      }, this.gameState)
+    })
   }
 }

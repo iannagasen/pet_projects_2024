@@ -1,6 +1,13 @@
 <p>poker works!</p>
 <button #clickStart>Distribute Cards</button>
 
-<li *ngFor="let card of cards$ | async">
-  {{ card.suit }} {{ card.face }}
-</li>
+<div *ngFor="let playerCards of gameState.currentPlayerCards">
+  <div>Player Name: {{ playerCards.player.name }}</div>
+  <div>Player Cards:</div>
+  <li *ngFor="let card of playerCards.cards">
+    <span *ngIf="card !== 'UNSET'">
+      {{ card.face }} -- {{ card.suit }}
+    </span>
+  </li>
+  <div> --------------------------- </div>
+</div>
