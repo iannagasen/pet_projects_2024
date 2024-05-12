@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Card, Deck, GameState, Player, submitEventReducer, UNSET_CARDS } from '../types';
-import { concatMap, from, fromEvent, interval, map, Observable, of, scan, take, tap } from 'rxjs';
+import { Card, Deck, GameState, INITIAL_GAME_STATE, Player, PokerGameEventHandler, UNSET_CARDS } from '../types';
+import { concatMap, from, fromEvent, interval, map, Observable, of, scan, switchMap, take, tap } from 'rxjs';
 
 @Component({
   selector: 'app-poker',
@@ -10,11 +10,23 @@ import { concatMap, from, fromEvent, interval, map, Observable, of, scan, take, 
   templateUrl: './poker.component.html',
 })
 export class PokerComponent implements AfterViewInit {
-  gameState: GameState;
+  gameState!: GameState;
+  gameEventHandler!: PokerGameEventHandler;
 
   @ViewChild('clickStart') clickStartBtn!: ElementRef;
 
   constructor() {
+    // this.gameState = {
+    //   type: 'undistributed',
+    //   matchHistory: [],
+    //   roundNo: 0,
+    //   currentPlayerCards: [
+    //     { player: {name: 'Player001'}, cards: UNSET_CARDS },
+    //     { player: {name: 'Player002'}, cards: UNSET_CARDS },
+    //     { player: {name: 'Player003'}, cards: UNSET_CARDS },
+    //     { player: {name: 'Player004'}, cards: UNSET_CARDS },
+    //   ]
+    // }
     this.gameState = {
       type: 'undistributed',
       matchHistory: [],
@@ -26,8 +38,9 @@ export class PokerComponent implements AfterViewInit {
         { player: {name: 'Player004'}, cards: UNSET_CARDS },
       ]
     }
+    this.gameEventHandler = PokerGameEventHandler.withInitial(this.gameState)
 
-    console.log(this.gameState)
+    // console.log(this.gameState)
   }
   
   ngAfterViewInit(): void {
@@ -39,26 +52,22 @@ export class PokerComponent implements AfterViewInit {
     });
 
     fromEvent(this.clickStartBtn.nativeElement, 'click').pipe(
-      concatMap(() => {
+      switchMap(() => {
         const shuffleDeck = new Deck().shuffle();
         return interval(50).pipe(
           take(shuffleDeck.length),
-          // tap(i => {
-          //   console.log("index -- " + i);
-          //   console.log(getPlayer(i))
-          // }),
           map(i => ({ 
             player: getPlayer(i),
-            card: (shuffleDeck[i]) 
+            card: (shuffleDeck[i]),
           })),
         )
       }),
     ).subscribe(val => {
-      this.gameState = submitEventReducer({
+      this.gameState = this.gameEventHandler.handle({
         type: 'DISTRIBUTED', 
         card: val.card, 
-        player: val.player
-      }, this.gameState)
+        player: val.player,
+      })
     })
   }
 }

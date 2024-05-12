@@ -27,12 +27,12 @@ export type PlayerSubmittedCards = {
 export type CardDistributedEvent = { 
   type: 'DISTRIBUTED', 
   player: Player,
-  card: Card
+  card: Card,
 }
 
-export type CardsSubmittedEvent = {
+export type CardSubmittedEvent = {
   type: 'SUBMITTED',
-  submittedCardsPerPlayer: [PlayerSubmittedCards, PlayerSubmittedCards, PlayerSubmittedCards, PlayerSubmittedCards]
+  submittedCardsPerPlayer: [PlayerSubmittedCards, PlayerSubmittedCards, PlayerSubmittedCards, PlayerSubmittedCards],
 }
 
 export type GameState = {
@@ -43,42 +43,115 @@ export type GameState = {
 };
 
 
-export function submitEventReducer(
-  event: CardDistributedEvent | CardsSubmittedEvent,
-  currentState: GameState
-): GameState {
-  switch (event.type) {
-    case "DISTRIBUTED":
-      const {player, card} = event;
-      const { currentPlayerCards } = currentState;
-      const index = currentPlayerCards.findIndex(pc => pc.player.name === player.name)
-      const targetPlayerCards = currentPlayerCards[index].cards
-      const firstUnsetIndex = targetPlayerCards.findIndex(card => card === 'UNSET');
+export class PokerGameEventHandler {
 
-      const newTargetPlayerCards = {
-        player: player,
-        cards: targetPlayerCards.slice(0, firstUnsetIndex).concat(card).concat(
-          targetPlayerCards.slice(firstUnsetIndex+1)) as Tuple<Card, 13>
-      }
+  private constructor(
+    private initialState: GameState,
+    private previousState?: GameState,
+    private isInitial = true,
+    private noOfCardsDistributed = 0
+  ) { }
+  
+  static withInitial(initialState: GameState) {
+    return new PokerGameEventHandler(initialState);
+  }
 
-      const newPlayerCards = 
-          currentPlayerCards.slice(0, index).concat(newTargetPlayerCards).concat(
-            currentPlayerCards.slice(index+1))
+  handle(event: CardDistributedEvent | CardSubmittedEvent): GameState {
+    this.isInitial = false;
+    switch(event.type) {
+      case "DISTRIBUTED": return this.handleDistributionEvent(event);
+      case "SUBMITTED": return this.handleSubmissionEvent(event);
+    }
+  }
 
-      return {
-        type: 'distributed',
-        roundNo: currentState.roundNo++, // is this the right place to increment this?
-        currentPlayerCards: newPlayerCards as Tuple<PlayerCards, 4>,
-        matchHistory: currentState.matchHistory
-      }
-    case "SUBMITTED":
-      return {
-        ...currentState,
-        type: 'submitted',
-        matchHistory: [ ...currentState.matchHistory, event.submittedCardsPerPlayer]
-      }
+  handleDistributionEvent(event: CardDistributedEvent): GameState {
+    const { player, card } = event;
+    const currentState = this.getCurrentState()
+    let currentPlayerCards: Tuple<PlayerCards, 4> = currentState.currentPlayerCards;
+    if (this.noOfCardsDistributed === 52) {
+      // reset
+      console.log(player, card)
+      currentPlayerCards = currentState.currentPlayerCards.map(pc => ({ ...pc, cards: UNSET_CARDS})) as Tuple<PlayerCards, 4>;
+      this.noOfCardsDistributed = 0
+    }
+
+    const index = currentPlayerCards.findIndex(pc => pc.player.name === player.name)
+    const targetPlayerCards = currentPlayerCards[index].cards
+    const firstUnsetIndex = targetPlayerCards.findIndex(card => card === 'UNSET');
+
+    const newTargetPlayerCards = {
+      player: player,
+      cards: targetPlayerCards.slice(0, firstUnsetIndex).concat(card).concat(
+        targetPlayerCards.slice(firstUnsetIndex+1)) as Tuple<Card, 13>
+    }
+
+    const newPlayerCards = 
+        currentPlayerCards.slice(0, index).concat(newTargetPlayerCards).concat(
+          currentPlayerCards.slice(index+1))
+
+    const newState: GameState = {
+      type: 'distributed',
+      roundNo: currentState.roundNo++, // is this the right place to increment this?
+      currentPlayerCards: newPlayerCards as Tuple<PlayerCards, 4>,
+      matchHistory: currentState.matchHistory
+    }
+
+    this.noOfCardsDistributed++;
+    // assign the newState as the previousState for next Event
+    return this.previousState = newState;
+  }
+
+  handleSubmissionEvent(event: CardSubmittedEvent): GameState {
+    const currentState = this.getCurrentState()
+    return {
+      ...currentState,
+      type: 'submitted',
+      matchHistory: [ ...currentState.matchHistory, event.submittedCardsPerPlayer]
+    }
+  }
+
+  private getCurrentState() : GameState {
+    return (!this.isInitial && this.previousState) ? this.previousState : this.initialState;
   }
 }
+
+// export function submitEventReducer(
+//   event: CardDistributedEvent | CardsSubmittedEvent,
+//   initialState: GameState
+// ): GameState {
+//   const currentState: GameState = event.previousState ?? initialState;
+//   switch (event.type) {
+//     case "DISTRIBUTED":
+//       const { player, card } = event;
+//       const { currentPlayerCards } = currentState;
+//       const index = currentPlayerCards.findIndex(pc => pc.player.name === player.name)
+//       const targetPlayerCards = currentPlayerCards[index].cards
+//       const firstUnsetIndex = targetPlayerCards.findIndex(card => card === 'UNSET');
+
+//       const newTargetPlayerCards = {
+//         player: player,
+//         cards: targetPlayerCards.slice(0, firstUnsetIndex).concat(card).concat(
+//           targetPlayerCards.slice(firstUnsetIndex+1)) as Tuple<Card, 13>
+//       }
+
+//       const newPlayerCards = 
+//           currentPlayerCards.slice(0, index).concat(newTargetPlayerCards).concat(
+//             currentPlayerCards.slice(index+1))
+
+//       return {
+//         type: 'distributed',
+//         roundNo: currentState.roundNo++, // is this the right place to increment this?
+//         currentPlayerCards: newPlayerCards as Tuple<PlayerCards, 4>,
+//         matchHistory: currentState.matchHistory
+//       }
+//     case "SUBMITTED":
+//       return {
+//         ...currentState,
+//         type: 'submitted',
+//         matchHistory: [ ...currentState.matchHistory, event.submittedCardsPerPlayer]
+//       }
+//   }
+// }
 
 export const UNSET_CARDS: Tuple<Card, 13> = ['UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET']
 
@@ -139,6 +212,18 @@ export const CARD_VALUE_ARR: Tuple<Card, 52> = [
   { suit: "Spades", face: 'Q'},
   { suit: "Spades", face: 'K'},
 ]
+
+export const INITIAL_GAME_STATE: GameState = {
+  type: 'undistributed',
+  matchHistory: [],
+  roundNo: 0,
+  currentPlayerCards: [
+    { player: {name: 'Player001'}, cards: UNSET_CARDS },
+    { player: {name: 'Player002'}, cards: UNSET_CARDS },
+    { player: {name: 'Player003'}, cards: UNSET_CARDS },
+    { player: {name: 'Player004'}, cards: UNSET_CARDS },
+  ]
+}
 
 export class Deck {
   cards: Tuple<Card, 52>;
