@@ -16,17 +16,6 @@ export class PokerComponent implements AfterViewInit {
   @ViewChild('clickStart') clickStartBtn!: ElementRef;
 
   constructor() {
-    // this.gameState = {
-    //   type: 'undistributed',
-    //   matchHistory: [],
-    //   roundNo: 0,
-    //   currentPlayerCards: [
-    //     { player: {name: 'Player001'}, cards: UNSET_CARDS },
-    //     { player: {name: 'Player002'}, cards: UNSET_CARDS },
-    //     { player: {name: 'Player003'}, cards: UNSET_CARDS },
-    //     { player: {name: 'Player004'}, cards: UNSET_CARDS },
-    //   ]
-    // }
     this.gameState = {
       type: 'undistributed',
       matchHistory: [],
@@ -39,8 +28,6 @@ export class PokerComponent implements AfterViewInit {
       ]
     }
     this.gameEventHandler = PokerGameEventHandler.withInitial(this.gameState)
-
-    // console.log(this.gameState)
   }
   
   ngAfterViewInit(): void {

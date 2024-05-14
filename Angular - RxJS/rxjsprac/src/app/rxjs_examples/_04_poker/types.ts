@@ -115,43 +115,6 @@ export class PokerGameEventHandler {
   }
 }
 
-// export function submitEventReducer(
-//   event: CardDistributedEvent | CardsSubmittedEvent,
-//   initialState: GameState
-// ): GameState {
-//   const currentState: GameState = event.previousState ?? initialState;
-//   switch (event.type) {
-//     case "DISTRIBUTED":
-//       const { player, card } = event;
-//       const { currentPlayerCards } = currentState;
-//       const index = currentPlayerCards.findIndex(pc => pc.player.name === player.name)
-//       const targetPlayerCards = currentPlayerCards[index].cards
-//       const firstUnsetIndex = targetPlayerCards.findIndex(card => card === 'UNSET');
-
-//       const newTargetPlayerCards = {
-//         player: player,
-//         cards: targetPlayerCards.slice(0, firstUnsetIndex).concat(card).concat(
-//           targetPlayerCards.slice(firstUnsetIndex+1)) as Tuple<Card, 13>
-//       }
-
-//       const newPlayerCards = 
-//           currentPlayerCards.slice(0, index).concat(newTargetPlayerCards).concat(
-//             currentPlayerCards.slice(index+1))
-
-//       return {
-//         type: 'distributed',
-//         roundNo: currentState.roundNo++, // is this the right place to increment this?
-//         currentPlayerCards: newPlayerCards as Tuple<PlayerCards, 4>,
-//         matchHistory: currentState.matchHistory
-//       }
-//     case "SUBMITTED":
-//       return {
-//         ...currentState,
-//         type: 'submitted',
-//         matchHistory: [ ...currentState.matchHistory, event.submittedCardsPerPlayer]
-//       }
-//   }
-// }
 
 export const UNSET_CARDS: Tuple<Card, 13> = ['UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET', 'UNSET']
 
