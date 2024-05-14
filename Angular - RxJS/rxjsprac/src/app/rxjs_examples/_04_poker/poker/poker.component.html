@@ -1,7 +1,7 @@
 <p>poker works!</p>
 <button #clickStart>Distribute Cards</button>
 
-<div *ngIf="gameState.currentPlayerCards" >
+<div *ngIf="gameState$ | async as gameState " >
   <div *ngFor="let playerCards of gameState.currentPlayerCards">
     <div>Player Name: {{ playerCards.player.name }}</div>
     <div>Player Cards:</div>
