@@ -6,6 +6,7 @@ import dev.agasen.ecom.api.core.product.Product;
 import dev.agasen.ecom.api.core.product.ProductService;
 import dev.agasen.ecom.product_service.persistence.ProductEntity;
 import dev.agasen.ecom.product_service.persistence.ProductRepository;
+import dev.agasen.ecom.util.mongo.SequenceGeneratorService;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -15,6 +16,7 @@ import reactor.core.publisher.Mono;
 public class ProductRestService implements ProductService {
 
   private final ProductRepository repository;
+  private final SequenceGeneratorService sequence;
 
   public @Override Flux<Product> getProducts() {
     return repository.findAll().map(this::toProductRestModel);
@@ -29,7 +31,13 @@ public class ProductRestService implements ProductService {
   }
   
   public @Override Mono<Product> createProduct(Product product) {
-    return repository.save(toProductEntityModel(product)).map(this::toProductRestModel);
+    return sequence.generateSequence(ProductEntity.SEQUENCE_NAME)
+        .flatMap(seq -> {
+          var entity = toProductEntityModel(product);
+          System.out.println("SEQUENCE ---- " + seq);
+          entity.setProductId(Math.toIntExact(seq));
+          return repository.save(entity).map(this::toProductRestModel);
+        });
   }
 
   private Product toProductRestModel(ProductEntity entity) {

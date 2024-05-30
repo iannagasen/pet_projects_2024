@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.data.mapping.context.MappingContext;
@@ -20,6 +21,7 @@ import dev.agasen.ecom.product_service.persistence.ProductEntity;
 import dev.agasen.ecom.product_service.persistence.ProductRepository;
 
 @SpringBootApplication
+@ComponentScan("dev.agasen")
 public class ProductServiceApplication {
 
 	private @Autowired ProductRepository productRepository;
@@ -35,9 +37,10 @@ public class ProductServiceApplication {
 	@Bean
 	public CommandLineRunner runInitialTestData() {
 		return args -> {
-
+		productRepository.deleteAll();
 		};
 	}
+
 
 	@Autowired
   ReactiveMongoOperations mongoTemplate;
@@ -50,10 +53,6 @@ public class ProductServiceApplication {
 
     ReactiveIndexOperations indexOps = mongoTemplate.indexOps(ProductEntity.class);
     resolver.resolveIndexFor(ProductEntity.class).forEach(e -> indexOps.ensureIndex(e).block());
-
-		var e1 = new ProductEntity(10, "test1", "Description of product 1");
-		var e2 = new ProductEntity(20, "test2", "Description of product 2");
-		System.err.println(productRepository.findAll().blockFirst());
   }
 
 }

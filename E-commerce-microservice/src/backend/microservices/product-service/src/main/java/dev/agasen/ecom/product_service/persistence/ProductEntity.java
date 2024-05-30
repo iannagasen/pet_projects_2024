@@ -1,6 +1,7 @@
 package dev.agasen.ecom.product_service.persistence;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,6 +16,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductEntity {
+
+  @Transient
+  public static final String SEQUENCE_NAME = "products_sequence";
 
   @Id
   private String id;

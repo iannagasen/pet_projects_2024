@@ -9,8 +9,8 @@ POST {{BASE}}/products
 Content-Type: application/json
 
 {
-  id: 11,
-  name: "testing again",
-  description: "desc"
+  "id": 21,
+  "name": "testing again",
+  "description": "desc"
 }
 
