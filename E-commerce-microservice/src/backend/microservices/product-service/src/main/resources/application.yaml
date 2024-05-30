@@ -1,0 +1,6 @@
+spring.application.name: product-service
+
+spring.data.mongodb:
+  host: localhost
+  port: 27018
+  database: product-db

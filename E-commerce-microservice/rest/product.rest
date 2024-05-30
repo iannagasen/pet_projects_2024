@@ -1,0 +1,16 @@
+@BASE = http://localhost:8080
+
+
+### GET ALL PRODUCTS
+GET {{BASE}}/products
+
+### CREATE PRODUCT
+POST {{BASE}}/products
+Content-Type: application/json
+
+{
+  id: 11,
+  name: "testing again",
+  description: "desc"
+}
+
