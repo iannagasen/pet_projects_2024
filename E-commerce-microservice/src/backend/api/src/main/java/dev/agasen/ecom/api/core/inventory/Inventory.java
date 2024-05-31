@@ -1,7 +1,13 @@
 package dev.agasen.ecom.api.core.inventory;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public record Inventory(
   Long productId,
-  int stock
+  int stock,
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  List<InventoryUpdate> history
 ) {
 }

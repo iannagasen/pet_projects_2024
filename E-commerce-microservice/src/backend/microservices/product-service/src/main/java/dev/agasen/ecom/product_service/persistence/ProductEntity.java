@@ -10,22 +10,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Document(collection = "products")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Document(collection="products")
 public class ProductEntity {
 
-  @Transient
-  public static final String SEQUENCE_NAME = "products_sequence";
+  public @Transient static final String SEQUENCE_NAME = "products_sequence";
 
-  @Id
-  private String id;
-
-  @Indexed(unique = true)
-  private int productId;
-
+  private @Id String id;
+  private @Indexed(unique=true) int productId;
   private String name;
   private String description;
 

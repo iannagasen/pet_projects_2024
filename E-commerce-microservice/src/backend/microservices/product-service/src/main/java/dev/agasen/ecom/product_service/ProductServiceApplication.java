@@ -37,7 +37,7 @@ public class ProductServiceApplication {
 	@Bean
 	public CommandLineRunner runInitialTestData() {
 		return args -> {
-		productRepository.deleteAll();
+      // productRepository.deleteAll().block();
 		};
 	}
 

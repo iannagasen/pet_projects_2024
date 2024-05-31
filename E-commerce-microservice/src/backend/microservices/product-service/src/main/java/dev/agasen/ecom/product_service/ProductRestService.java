@@ -19,7 +19,7 @@ public class ProductRestService implements ProductService {
   private final SequenceGeneratorService sequence;
 
   public @Override Flux<Product> getProducts() {
-    return repository.findAll().map(this::toProductRestModel);
+    return repository.findAll().map(repository::toProductRestModel);
   }
   
   public @Override Mono<Product> getProduct(Long id) {
@@ -33,19 +33,12 @@ public class ProductRestService implements ProductService {
   public @Override Mono<Product> createProduct(Product product) {
     return sequence.generateSequence(ProductEntity.SEQUENCE_NAME)
         .flatMap(seq -> {
-          var entity = toProductEntityModel(product);
-          System.out.println("SEQUENCE ---- " + seq);
+          ProductEntity entity = repository.toProductEntityModel(product);
           entity.setProductId(Math.toIntExact(seq));
-          return repository.save(entity).map(this::toProductRestModel);
+          return repository.save(entity).map(repository::toProductRestModel);
         });
   }
 
-  private Product toProductRestModel(ProductEntity entity) {
-    return new Product(entity.getProductId(), entity.getName(), entity.getDescription());
-  }
 
-  private ProductEntity toProductEntityModel(Product rest) {
-    return new ProductEntity(rest.id(), rest.name(), rest.description());
-  }
   
 }

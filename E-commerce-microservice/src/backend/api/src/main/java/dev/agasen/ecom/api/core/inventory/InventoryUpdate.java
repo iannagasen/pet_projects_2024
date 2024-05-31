@@ -1,5 +1,9 @@
 package dev.agasen.ecom.api.core.inventory;
 
-public class InventoryUpdate {
-  
-}
+import java.time.LocalDateTime;
+
+public record InventoryUpdate(
+  Long productId,
+  InventoryUpdateType type,
+  LocalDateTime dateTime
+) { }
