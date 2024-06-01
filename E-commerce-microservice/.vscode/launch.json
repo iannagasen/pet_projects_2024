@@ -19,6 +19,16 @@
       "projectName": "inventory-service",
       "args": "",
       "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-CartServiceApplication<cart-service>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "dev.agasen.ecom.cart_service.CartServiceApplication",
+      "projectName": "cart-service",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
     }
   ]
 }
