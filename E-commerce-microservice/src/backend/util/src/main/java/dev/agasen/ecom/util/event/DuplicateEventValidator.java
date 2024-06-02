@@ -1,7 +1,5 @@
 package dev.agasen.ecom.util.event;
 
-import java.util.function.Function;
-
 import org.springframework.stereotype.Component;
 
 import dev.agasen.ecom.api.exceptions.EventAlreadyProcessedException;
@@ -24,5 +22,5 @@ public class DuplicateEventValidator {
         .transform(this::emitErrorForRedundantProcessing)
         .then(eventProcessingPublisher);
 
-  } 
+  }
 }

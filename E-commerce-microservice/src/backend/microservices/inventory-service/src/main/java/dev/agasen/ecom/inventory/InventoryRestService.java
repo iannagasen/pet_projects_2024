@@ -1,12 +1,12 @@
-package dev.agasen.ecom.inventory_service;
+package dev.agasen.ecom.inventory;
 
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.agasen.ecom.api.core.inventory.Inventory;
 import dev.agasen.ecom.api.core.inventory.InventoryService;
 import dev.agasen.ecom.api.core.inventory.InventoryUpdate;
-import dev.agasen.ecom.inventory_service.persistence.InventoryRepository;
-import dev.agasen.ecom.inventory_service.persistence.InventoryUpdateRepository;
+import dev.agasen.ecom.inventory.persistence.InventoryRepository;
+import dev.agasen.ecom.inventory.persistence.InventoryUpdateRepository;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
