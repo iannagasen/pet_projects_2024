@@ -1,11 +1,11 @@
-package dev.agasen.ecom.product_service;
+package dev.agasen.ecom.product;
 
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.agasen.ecom.api.core.product.Product;
 import dev.agasen.ecom.api.core.product.ProductService;
-import dev.agasen.ecom.product_service.persistence.ProductEntity;
-import dev.agasen.ecom.product_service.persistence.ProductRepository;
+import dev.agasen.ecom.product.persistence.ProductEntity;
+import dev.agasen.ecom.product.persistence.ProductRepository;
 import dev.agasen.ecom.util.mongo.SequenceGeneratorService;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;

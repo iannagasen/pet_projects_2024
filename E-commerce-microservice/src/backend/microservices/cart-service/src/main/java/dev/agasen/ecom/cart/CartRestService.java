@@ -1,10 +1,10 @@
-package dev.agasen.ecom.cart_service;
+package dev.agasen.ecom.cart;
 
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.agasen.ecom.api.core.cart.Cart;
 import dev.agasen.ecom.api.core.cart.CartService;
-import dev.agasen.ecom.cart_service.persistence.CartRepository;
+import dev.agasen.ecom.cart.persistence.CartRepository;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

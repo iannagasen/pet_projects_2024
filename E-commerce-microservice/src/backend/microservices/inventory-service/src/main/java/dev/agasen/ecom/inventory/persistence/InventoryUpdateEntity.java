@@ -1,4 +1,4 @@
-package dev.agasen.ecom.inventory_service.persistence;
+package dev.agasen.ecom.inventory.persistence;
 
 import java.time.LocalDateTime;
 

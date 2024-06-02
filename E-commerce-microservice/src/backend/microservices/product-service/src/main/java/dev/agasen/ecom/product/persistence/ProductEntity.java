@@ -1,4 +1,4 @@
-package dev.agasen.ecom.product_service.persistence;
+package dev.agasen.ecom.product.persistence;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;

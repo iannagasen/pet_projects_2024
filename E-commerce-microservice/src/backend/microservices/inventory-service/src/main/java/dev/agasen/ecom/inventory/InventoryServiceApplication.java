@@ -1,4 +1,4 @@
-package dev.agasen.ecom.inventory_service;
+package dev.agasen.ecom.inventory;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
-import dev.agasen.ecom.inventory_service.persistence.InventoryRepository;
-import dev.agasen.ecom.inventory_service.persistence.InventoryUpdateRepository;
+import dev.agasen.ecom.inventory.persistence.InventoryRepository;
+import dev.agasen.ecom.inventory.persistence.InventoryUpdateRepository;
 
 @SpringBootApplication
 @ComponentScan("dev.agasen")

@@ -1,4 +1,4 @@
-package dev.agasen.ecom.inventory_service.persistence;
+package dev.agasen.ecom.inventory.persistence;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 public interface InventoryRepository extends ReactiveMongoRepository<InventoryEntity, String> {
 
   Mono<InventoryEntity> findByProductId(Long productId);
-  
+
   default Inventory toInventoryRestModel(InventoryEntity e, List<InventoryUpdate> history) {
     return new Inventory(e.getProductId(), e.getStock(), history);
   }

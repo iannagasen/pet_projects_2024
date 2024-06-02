@@ -1,4 +1,4 @@
-package dev.agasen.ecom.product_service;
+package dev.agasen.ecom.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -17,8 +17,8 @@ import org.springframework.data.mongodb.core.index.ReactiveIndexOperations;
 import org.springframework.data.mongodb.core.mapping.MongoPersistentEntity;
 import org.springframework.data.mongodb.core.mapping.MongoPersistentProperty;
 
-import dev.agasen.ecom.product_service.persistence.ProductEntity;
-import dev.agasen.ecom.product_service.persistence.ProductRepository;
+import dev.agasen.ecom.product.persistence.ProductEntity;
+import dev.agasen.ecom.product.persistence.ProductRepository;
 
 @SpringBootApplication
 @ComponentScan("dev.agasen")

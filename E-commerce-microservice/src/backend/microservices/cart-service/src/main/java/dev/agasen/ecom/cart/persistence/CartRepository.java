@@ -1,4 +1,4 @@
-package dev.agasen.ecom.cart_service.persistence;
+package dev.agasen.ecom.cart.persistence;
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
