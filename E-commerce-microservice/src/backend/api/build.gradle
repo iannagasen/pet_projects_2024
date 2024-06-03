@@ -11,14 +11,18 @@ repositories {
     mavenCentral()
 }
 
-
 ext {
-    springBootVersion = '3.1.0'
+    springBootVersion = '3.2.6'
+		springCloudVersion = '2023.0.1'
 }
 
 dependencies {
 	implementation 'org.springdoc:springdoc-openapi-starter-common:2.0.2'
 	implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+
+
+	implementation 'org.springframework.cloud:spring-cloud-stream'
+	implementation 'org.springframework.cloud:spring-cloud-stream-binder-kafka-reactive'
 
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -28,6 +32,12 @@ dependencies {
 	
 	testCompileOnly 'org.projectlombok:lombok:1.18.30'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
 }
 
 tasks.named('test') {

@@ -21,6 +21,11 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+    springBootVersion = '3.1.0'
+		set('springCloudVersion', "2023.0.1")
+}
+
 dependencies {
 	implementation project(':src:backend:api') 
   implementation project(':src:backend:util')
@@ -32,6 +37,12 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
 }
 
 tasks.named('test') {
