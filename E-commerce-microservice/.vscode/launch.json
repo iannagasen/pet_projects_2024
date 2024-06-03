@@ -39,6 +39,16 @@
       "projectName": "cart-service",
       "args": "",
       "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-PaymentApplication<customer-payment-service>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "dev.agasen.ecom.payment.PaymentApplication",
+      "projectName": "customer-payment-service",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
     }
   ]
 }

@@ -20,11 +20,15 @@ import org.springframework.data.mongodb.core.mapping.MongoPersistentProperty;
 import dev.agasen.ecom.product.persistence.ProductEntity;
 import dev.agasen.ecom.product.persistence.ProductRepository;
 
+
 @SpringBootApplication
 @ComponentScan("dev.agasen")
 public class ProductServiceApplication {
 
 	private @Autowired ProductRepository productRepository;
+
+
+  
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext ctx = SpringApplication.run(ProductServiceApplication.class, args);

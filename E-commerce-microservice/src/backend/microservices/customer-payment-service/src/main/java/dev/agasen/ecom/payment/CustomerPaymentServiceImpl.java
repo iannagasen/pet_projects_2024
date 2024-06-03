@@ -1,18 +1,13 @@
 package dev.agasen.ecom.payment;
 
-import java.util.function.UnaryOperator;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import dev.agasen.ecom.api.core.payment.CustomerPayment;
 import dev.agasen.ecom.api.core.payment.CustomerPaymentService;
 import dev.agasen.ecom.api.core.payment.PaymentProcessRequest;
-import dev.agasen.ecom.api.event.order.OrderEvent;
-import dev.agasen.ecom.api.event.payment.PaymentEvent;
 import dev.agasen.ecom.api.event.payment.PaymentStatus;
 import dev.agasen.ecom.api.exceptions.CustomerNotFoundException;
-import dev.agasen.ecom.api.exceptions.EventAlreadyProcessedException;
 import dev.agasen.ecom.api.exceptions.InsufficientBalanceException;
 import dev.agasen.ecom.api.exceptions.PaymentNotFoundException;
 import dev.agasen.ecom.api.exceptions.UndeductedPaymentRefundException;
