@@ -19,8 +19,11 @@ import lombok.Setter;
 public class CustomerPaymentEntity {
 
   private @Id String id;
+  // ! do I need an explicit id for every entity
+  // private @Indexed Long paymentId;
   private @Indexed(unique=true) Long orderId;
   private Long customerId;
   private PaymentStatus status;
   private Long amount;
+
 }

@@ -11,21 +11,21 @@ public interface PaymentEvent extends DomainEvent, OrderSaga {
   @Builder
   record Deducted(Long orderId,
                   Instant createdAt,
-                  Long paymentId,
+                  String paymentId,
                   Long customerId,
-                  int amount) implements PaymentEvent {};
+                  Long amount) implements PaymentEvent {};
 
   @Builder
   record Refunded(Long orderId,
-                  Long paymentId,
+                  String paymentId,
                   Long customerId,
-                  int amount,
+                  Long amount,
                   Instant createdAt) implements PaymentEvent {};
 
   @Builder
   record Declined(Long orderId,
                   Long customerId,
                   String message,
-                  int amount,
+                  Long amount,
                   Instant createdAt) implements PaymentEvent {};
 }
