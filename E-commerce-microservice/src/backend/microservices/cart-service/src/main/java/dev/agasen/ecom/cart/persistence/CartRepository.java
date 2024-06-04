@@ -2,7 +2,7 @@ package dev.agasen.ecom.cart.persistence;
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
-import dev.agasen.ecom.api.core.cart.Cart;
+import dev.agasen.ecom.api.core.cart.model.Cart;
 import reactor.core.publisher.Mono;
 
 public interface CartRepository extends ReactiveMongoRepository<CartEntity, String> {

@@ -6,10 +6,10 @@ import java.util.function.Function;
 import org.springframework.data.mongodb.core.aggregation.ArrayOperators.In;
 import org.springframework.stereotype.Component;
 
-import dev.agasen.ecom.api.core.payment.CustomerPayment;
-import dev.agasen.ecom.api.core.payment.PaymentProcessRequest;
-import dev.agasen.ecom.api.event.order.OrderEvent;
-import dev.agasen.ecom.api.event.payment.PaymentEvent;
+import dev.agasen.ecom.api.core.order.event.OrderEvent;
+import dev.agasen.ecom.api.core.payment.event.PaymentEvent;
+import dev.agasen.ecom.api.core.payment.model.CustomerPayment;
+import dev.agasen.ecom.api.core.payment.model.PaymentProcessRequest;
 import reactor.core.publisher.Mono;
 
 @Component

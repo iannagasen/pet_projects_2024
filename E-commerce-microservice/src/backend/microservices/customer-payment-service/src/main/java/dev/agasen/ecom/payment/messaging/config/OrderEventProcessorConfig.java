@@ -8,10 +8,10 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
 
-import dev.agasen.ecom.api.event.order.OrderEvent;
-import dev.agasen.ecom.api.event.payment.PaymentEvent;
-import dev.agasen.ecom.api.processor.OrderEventProcessor;
-import dev.agasen.ecom.api.util.MessageConverter;
+import dev.agasen.ecom.api.core.order.event.OrderEvent;
+import dev.agasen.ecom.api.core.order.event.OrderEventProcessor;
+import dev.agasen.ecom.api.core.payment.event.PaymentEvent;
+import dev.agasen.ecom.api.event.util.MessageConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;

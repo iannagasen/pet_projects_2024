@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
-import dev.agasen.ecom.api.core.inventory.Inventory;
-import dev.agasen.ecom.api.core.inventory.InventoryUpdate;
+import dev.agasen.ecom.api.core.inventory.model.Inventory;
+import dev.agasen.ecom.api.core.inventory.model.InventoryUpdate;
 import reactor.core.publisher.Mono;
 
 public interface InventoryRepository extends ReactiveMongoRepository<InventoryEntity, String> {

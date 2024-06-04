@@ -2,9 +2,9 @@ package dev.agasen.ecom.payment.mapper;
 
 import org.springframework.stereotype.Component;
 
-import dev.agasen.ecom.api.core.payment.CustomerPayment;
-import dev.agasen.ecom.api.core.payment.PaymentProcessRequest;
-import dev.agasen.ecom.api.mapper.RestEntityMapper;
+import dev.agasen.ecom.api.core.payment.model.CustomerPayment;
+import dev.agasen.ecom.api.core.payment.model.PaymentProcessRequest;
+import dev.agasen.ecom.api.rest.mapper.RestEntityMapper;
 import dev.agasen.ecom.payment.persistence.CustomerPaymentEntity;
 
 @Component

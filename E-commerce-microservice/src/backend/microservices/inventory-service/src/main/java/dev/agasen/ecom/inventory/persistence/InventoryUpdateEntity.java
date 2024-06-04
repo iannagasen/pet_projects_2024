@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import dev.agasen.ecom.api.core.inventory.InventoryUpdateType;
+import dev.agasen.ecom.api.core.inventory.model.InventoryUpdateType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import dev.agasen.ecom.api.core.cart.CartItem;
+import dev.agasen.ecom.api.core.cart.model.CartItem;
 import lombok.Data;
 
 @Data

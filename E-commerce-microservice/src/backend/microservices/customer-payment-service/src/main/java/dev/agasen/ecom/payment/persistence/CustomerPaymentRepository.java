@@ -2,7 +2,7 @@ package dev.agasen.ecom.payment.persistence;
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
-import dev.agasen.ecom.api.event.payment.PaymentStatus;
+import dev.agasen.ecom.api.core.payment.event.PaymentStatus;
 import reactor.core.publisher.Mono;
 
 public interface CustomerPaymentRepository extends ReactiveMongoRepository<CustomerPaymentEntity, String> {
