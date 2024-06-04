@@ -38,7 +38,5 @@ public class ProductService implements ProductRestService {
           return repository.save(entity).map(repository::toProductRestModel);
         });
   }
-
-
   
 }

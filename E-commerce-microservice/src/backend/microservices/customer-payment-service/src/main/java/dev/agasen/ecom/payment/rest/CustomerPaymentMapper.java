@@ -1,4 +1,4 @@
-package dev.agasen.ecom.payment.mapper;
+package dev.agasen.ecom.payment.rest;
 
 import org.springframework.stereotype.Component;
 

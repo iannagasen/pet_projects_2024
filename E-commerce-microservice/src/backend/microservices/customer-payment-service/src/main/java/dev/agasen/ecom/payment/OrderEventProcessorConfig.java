@@ -1,4 +1,4 @@
-package dev.agasen.ecom.payment.messaging.config;
+package dev.agasen.ecom.payment;
 
 import java.util.function.Function;
 

@@ -1,4 +1,4 @@
-package dev.agasen.ecom.payment.messaging.processor;
+package dev.agasen.ecom.payment.messaging;
 
 import java.util.function.UnaryOperator;
 
@@ -12,7 +12,6 @@ import dev.agasen.ecom.api.core.order.event.OrderEvent.Created;
 import dev.agasen.ecom.api.core.payment.event.CustomerPaymentEventService;
 import dev.agasen.ecom.api.core.payment.event.PaymentEvent;
 import dev.agasen.ecom.api.exceptions.EventAlreadyProcessedException;
-import dev.agasen.ecom.payment.messaging.mapper.CustomerPaymentMessageMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
@@ -20,7 +19,7 @@ import reactor.core.publisher.Mono;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class OrderEventProcessorImpl implements OrderEventProcessor<PaymentEvent>{
+public class OrderPaymentEventProcessor implements OrderEventProcessor<PaymentEvent>{
 
   private final CustomerPaymentEventService paymentService;
   private final CustomerPaymentMessageMapper paymentMsgMapper;

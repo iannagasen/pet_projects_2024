@@ -1,9 +1,8 @@
-package dev.agasen.ecom.payment.messaging.mapper;
+package dev.agasen.ecom.payment.messaging;
 
 import java.time.Instant;
 import java.util.function.Function;
 
-import org.springframework.data.mongodb.core.aggregation.ArrayOperators.In;
 import org.springframework.stereotype.Component;
 
 import dev.agasen.ecom.api.core.order.event.OrderEvent;
