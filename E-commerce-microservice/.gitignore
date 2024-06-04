@@ -1,7 +1,7 @@
 HELP.md
 .gradle
-.gradle/**
-.gradle/*
+~/.gradle/**
+~/.gradle/*
 build/
 
 .gradle/8.7/executionHistory/

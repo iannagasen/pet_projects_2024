@@ -33,10 +33,9 @@ public class ProductService implements ProductRestService {
   public @Override Mono<Product> createProduct(Product product) {
     return sequence.generateSequence(ProductEntity.SEQUENCE_NAME)
         .flatMap(seq -> {
-          ProductEntity entity = repository.toProductEntityModel(product);
-          entity.setProductId(Math.toIntExact(seq));
-          return repository.save(entity).map(repository::toProductRestModel);
+            ProductEntity entity = repository.toProductEntityModel(product);
+            entity.setProductId(Math.toIntExact(seq));
+            return repository.save(entity).map(repository::toProductRestModel);
         });
   }
-  
 }

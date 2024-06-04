@@ -27,9 +27,6 @@ public class ProductServiceApplication {
 
 	private @Autowired ProductRepository productRepository;
 
-
-  
-
 	public static void main(String[] args) {
 		ConfigurableApplicationContext ctx = SpringApplication.run(ProductServiceApplication.class, args);
 
