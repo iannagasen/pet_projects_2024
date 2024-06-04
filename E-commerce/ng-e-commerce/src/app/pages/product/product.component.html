@@ -2,6 +2,10 @@
   Works with productId: {{productId}}
 </div>
 
-<div>
-  <div> {{ product | json }} </div>
+<div class="flex flex-col justify-center items-center">
+  <div class="border border-red-300">
+    <app-image imageUrl="{{product.imagePaths && product.imagePaths[0]}}"></app-image>
+  </div>
+  <div>Hello</div>
+  <div>World</div>
 </div>

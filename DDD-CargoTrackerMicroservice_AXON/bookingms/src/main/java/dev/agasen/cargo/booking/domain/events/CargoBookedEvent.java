@@ -1,4 +1,4 @@
-package dev.agasen.cargo.booking.application.command.bookedevent;
+package dev.agasen.cargo.booking.domain.events;
 
 import dev.agasen.cargo.booking.domain.valueobjects.BookingAmount;
 import dev.agasen.cargo.booking.domain.valueobjects.Location;

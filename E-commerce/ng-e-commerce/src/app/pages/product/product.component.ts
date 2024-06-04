@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ProductRestAdapterService } from 'src/app/api/services';
 import { Product } from 'src/app/api/models';
+import { ImageComponent } from 'src/app/shared/components/image/image.component';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ImageComponent],
   templateUrl: './product.component.html',
 })
 export class ProductComponent implements OnInit {

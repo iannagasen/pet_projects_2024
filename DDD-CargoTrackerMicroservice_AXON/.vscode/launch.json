@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-BookingmsApplication<bookingms>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "dev.agasen.cargo.booking.BookingmsApplication",
+      "projectName": "bookingms",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

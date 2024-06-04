@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-QuestionmsApplication<questionms>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "dev.agasen.question.QuestionmsApplication",
+      "projectName": "questionms",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
